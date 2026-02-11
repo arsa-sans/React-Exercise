@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geometri</title>
+  <style>
+
+    body {
+      background: #f5f5f5;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 25px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    li {
+      background-color: lightslategray;
+      color: white;
+      padding: 3px;
+      margin: 5px 0;
+      list-style: none;
+      width: 150px;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 1.2rem;
+    }
+    
+    li:hover {
+      background-color: rgb(222, 222, 222);
+      cursor: pointer;
+      color: black;
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    input {
+
+      width: 95%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 8px auto;
+      display: block;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    const Persegi = () => {
+      const [luas, setLuas] = React.useState(0)
+      const hitungLuas = () => {
+        const sisi = document.getElementById('sisi').value
+        setLuas(sisi * sisi)
+      }
+      return (
+        <>
+          <div className="card">
+            <h2>Persegi</h2>
+            <input id="sisi" type="number" placeholder="Sisi" />
+            <button onClick={hitungLuas}>Hitung</button>
+            <p>Luas = {luas}</p>
+          </div>
+        </>
+      )
+    }
+
+    const PersegiPanjang = () => {
+      const [luas, setLuas] = React.useState(0)
+      const hitungLuas = () => {
+        const lebar = document.getElementById('lebar').value
+        const panjang = document.getElementById('panjang').value
+        setLuas(panjang * lebar)
+      }
+      return (
+        <>
+          <div className="card">
+            <h2>Persegi Panjang</h2>
+            <input id="lebar" type="number" placeholder="Lebar" />
+            <input id="panjang" type="number" placeholder="Panjang" />
+            <button onClick={hitungLuas}>Hitung</button>
+            <p>Luas = {luas}</p>
+          </div>
+        </>
+      )
+    }
+
+    const SegiTiga = () => {
+      const [luas, setLuas] = React.useState(0)
+      const hitungLuas = () => {
+        const alas = document.getElementById('alas').value
+        const tinggi = document.getElementById('tinggi').value
+        setLuas(alas * tinggi / 2)
+      }
+      return (
+        <>
+          <div className="card">
+            <h2>Persegi Panjang</h2>
+            <input id="alas" type="number" placeholder="Alas" />
+            <input id="tinggi" type="number" placeholder="Tinggi" />
+            <button onClick={hitungLuas}>Hitung</button>
+            <p>Luas = {luas}</p>
+          </div>
+        </>
+      )
+    }
+
+    const JajarGenjang = () => {
+      const [luas, setLuas] = React.useState(0)
+      const hitungLuas = () => {
+        const alas = document.getElementById('alas').value
+        const tinggi = document.getElementById('tinggi').value
+        setLuas(alas * tinggi)
+      }
+      return (
+        <>
+          <div className="card">
+            <h2>Jajar Genjang</h2>
+            <input id="alas" type="number" placeholder="Alas" />
+            <input id="tinggi" type="number" placeholder="Tinggi" />
+            <button onClick={hitungLuas}>Hitung</button>
+            <p>Luas = {luas}</p>
+          </div>
+        </>
+      )
+    }
+
+    const Lingkaran = () => {
+      const [luas, setLuas] = React.useState(0)
+      const hitungLuas = () => {
+        const jari = document.getElementById('jari').value
+        setLuas(3.14 * jari**2)
+      }
+      return (
+        <>
+          <div className="card">
+            <h2>Lingkaran</h2>
+            <input id="jari" type="number" placeholder="Jari-Jari" />
+            <button onClick={hitungLuas}>Hitung</button>
+            <p>Luas = {luas}</p>
+          </div>
+        </>
+      )
+    }
+
+    const NavGeo = () => {
+      const [page, setPage] = React.useState("Persegi");
+
+      return (
+        <div>
+          <nav>
+          <ul style={{
+            display: " flex",
+            gap: "20px",
+            justifyContent: "center",
+          }}>
+            <li onClick={() => setPage("Persegi")}>Persegi</li>
+            <li onClick={() => setPage("PersegiPanjang")}>Persegi Panjang</li>
+            <li onClick={() => setPage("Lingkaran")}>Lingkaran</li>
+            <li onClick={() => setPage("SegiTiga")}>Segitiga</li>
+            <li onClick={() => setPage("JajarGenjang")}>Jajar Genjang</li>
+          </ul>
+        </nav>
+
+        {page === "Persegi" ? (
+          <Persegi></Persegi>
+        ) : page === "PersegiPanjang" ? (
+          <PersegiPanjang></PersegiPanjang>
+        ) : page === "Lingkaran" ? (
+          <Lingkaran></Lingkaran>
+        ) : page === "SegiTiga" ? (
+          <SegiTiga></SegiTiga>
+        ) : page === "JajarGenjang" ? (
+          <JajarGenjang></JajarGenjang>
+        ) : ''}  
+        </div>
+      )
+    }
+
+    const HomePage = () => {
+      return (
+        <NavGeo />
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(
+      <HomePage />
+    );
+
+  </script>
+</body>
+
+</html>
