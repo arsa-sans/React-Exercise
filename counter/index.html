@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>count</title>
+  <style>
+    .fade {
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root" style="display: flex; justify-content: center; align-items: center; height: 90vh;"></div>
+
+
+  <script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+
+    
+    const MyButton = ({ text, onClick, count }) => {
+      const Style = (text !== 'reset') ? {} : { margin: 20, display: 'block' };
+      const isDisabled = text === "-" && count === 0;
+      return (
+        <>
+          <button onClick={onClick} style={{ ...Style, cursor: isDisabled ? "not-allowed" : "pointer" }} disabled={isDisabled}>
+            {text}
+          </button>
+        </>
+      );
+    }
+
+
+    const MyCount = ({ count }) => {
+      return (
+        <span
+          key={count}
+          className="fade"
+          style={{ margin: 20, fontSize: 24 }}
+        >
+          {count}
+        </span>
+      );
+    };
+
+
+    const HomePage = () => {
+      const [count, setCount] = React.useState(0);
+
+      function tambah() {
+        setCount(count + 1);
+      }
+
+      function kurang() {
+        setCount(count - 1);
+      }
+
+      function reset() {
+        setCount(0);
+      }
+
+      return (
+        <div>
+          <MyButton text={'-'} onClick={kurang} count={count} />
+          <MyCount count={count} />
+          <MyButton text={'+'} onClick={tambah} count={count} />
+          <MyButton text={'reset'} onClick={reset} count={count} />
+        </div>
+      );
+    }
+
+    root.render(<HomePage />);
+  </script>
+</body>
+
+</html>
