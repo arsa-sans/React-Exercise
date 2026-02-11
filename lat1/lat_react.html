@@ -1,0 +1,107 @@
+<!-- 
+React
+Library untuk membangun antarmuka pengguna(UI)
+relatif un-opinion
+banyak tools pihak ketiga yang mendukung pengembangan dengan React
+
+Sejarah
+dibuat oleh Jordan Walke, seorang engineer Facebook
+dirilis pada tahun 2013 sebagai pustaka JavaScript sumber terbuka
+
+konsep utama
+Ui bisa dipecah menjadi komponen-komponen kecil yang dapat digunakan kembali
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>React 🚀</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+
+    function Header({author}) {
+      return <h1>Belajar React bareng {author ?  author : 'NoName'} 🚀</h1>;
+    }
+
+    const Button = () => {
+      const [counter, setCounter] = React.useState(0)
+      const handleCounter = () => setCounter(counter + 1)
+      return (
+        <>
+          <button onClick={handleCounter}>{counter}</button>
+        </>
+      )
+    }
+
+    const Kubus = () => {
+      const [luas, setLuas] = React.useState(0)
+
+      const hitungLuas = () => {
+        const sisi = document.getElementById('sisi').value
+        setLuas(sisi * sisi)
+      }
+      return (
+        <>
+          <input id="sisi" type="number" onChange={hitungLuas}/> = <label for="">{luas}</label>
+        </>
+      )
+    }
+
+    function NavBar() {
+      const nav = ['Home', 'Contact', 'About'];
+      return (
+        <ul>
+          {
+            nav.map((nav) => (
+              <li key={nav}><a href="">{nav}</a></li>
+            ))
+          }
+        </ul>
+      )
+    }
+
+    const Content = () => {
+      const siswa = ['Agus', 'Dedi', 'Ilham', 'Ade', 'Cecep', 'Nanang']
+      return (
+        <>
+          Nama Siswa
+          <ul>
+            {
+              siswa.map((s) => (
+                <li key={s}>{s}</li>
+              ))
+            }
+          </ul>
+        </>
+      )
+    }
+
+    function HomePage() {
+      return (
+        <>
+          <Header author="Sans"/>
+          <Header author=""/>
+          <Kubus/>
+          <Button/>
+          <NavBar/>
+          <Content/>
+        </>
+      );
+    }
+
+    root.render(<HomePage/>);
+
+  </script>
+</body>
+
+</html>
